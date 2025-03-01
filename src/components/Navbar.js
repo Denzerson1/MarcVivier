@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ShoppingBagIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { ShoppingBag, Menu, X, ChevronDown, ChevronUp } from "lucide-react";
 import { useCartStore } from "../store/cartStore";
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
+  const [mobileDropdown, setMobileDropdown] = useState(null); // Separate state for mobile
   const { toggleCart } = useCartStore();
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -23,6 +24,10 @@ function Navbar() {
     setOpenDropdown(openDropdown === category ? null : category);
   };
 
+  const toggleMobileDropdown = (category) => {
+    setMobileDropdown(mobileDropdown === category ? null : category);
+  };
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (!event.target.closest(".dropdown")) {
@@ -35,28 +40,26 @@ function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 w-full z-50 transition-colors duration-300 backdrop-blur-md ${isScrolled ? "bg-white text-black shadow-md" : "bg-white/10 text-white"
-        }`}
+      className={`fixed top-0 left-0 w-full z-50 transition-colors duration-300 md:backdrop-blur-md 
+        ${isScrolled ? "bg-white text-black shadow-md" : "bg-white/10 text-white md:bg-white/10"}
+      `}
     >
-
       {/* Navbar */}
       <div className="flex justify-between items-center px-6 py-4 relative">
         {/* Left Side - Menu Button (Mobile) */}
         <button className="md:hidden hover:text-gray-500" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-          {isMenuOpen ? <XMarkIcon className="h-6 w-6" /> : <Bars3Icon className="h-6 w-6" />}
+          {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
 
-        {/* Center - Logo (Bigger) */}
+        {/* Center - Logo */}
         <div className="absolute left-1/2 transform -translate-x-1/2">
           <img src="/logo.png" alt="Vacier Logo" className="h-28" />
         </div>
 
-        {/* Right Side - Icons */}
-        <div className="flex items-center">
-          <button className="relative hover:text-gray-500">
-            <ShoppingBagIcon onClick={toggleCart} className="h-6 w-6" />
-          </button>
-        </div>
+        {/* Right Side - Shopping Bag */}
+        <button className="relative hover:text-gray-500">
+          <ShoppingBag onClick={toggleCart} className="h-6 w-6" />
+        </button>
       </div>
 
       {/* Desktop Menu */}
@@ -106,17 +109,37 @@ function Navbar() {
               className="fixed inset-y-0 left-0 w-3/4 bg-white text-black flex flex-col space-y-4 p-6 z-50 shadow-lg"
             >
               <button className="self-end hover:text-gray-600" onClick={() => setIsMenuOpen(false)}>
-                <XMarkIcon className="h-6 w-6" />
+                <X className="h-6 w-6" />
               </button>
               {["Männer", "Frauen", "Bewertungen", "Info", "Aktionen", "Non-Violence"].map((category) => (
                 <div key={category} className="border-b pb-2">
                   <button
                     className="w-full text-left flex justify-between items-center uppercase font-medium text-lg hover:text-gray-600"
-                    onClick={() => toggleDropdown(category)}
+                    onClick={() => toggleMobileDropdown(category)}
                   >
                     {category}
-                    {["Männer", "Frauen", "Info"].includes(category) && <span>{openDropdown === category ? "▲" : "▼"}</span>}
+                    {["Männer", "Frauen", "Info"].includes(category) ? (
+                      mobileDropdown === category ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />
+                    ) : null}
                   </button>
+
+                  {/* Mobile Dropdown Items */}
+                  <AnimatePresence>
+                    {mobileDropdown === category && ["Männer", "Frauen", "Info"].includes(category) && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="ml-4 mt-2 space-y-2 text-gray-700 text-sm"
+                      >
+                        <a href="#" className="block hover:text-gray-500">Armbänder</a>
+                        <a href="#" className="block hover:text-gray-500">Ohrringe</a>
+                        <a href="#" className="block hover:text-gray-500">Halsketten</a>
+                        <a href="#" className="block hover:text-gray-500">Ringe</a>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               ))}
             </motion.div>
