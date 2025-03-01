@@ -1,6 +1,17 @@
 import React from "react";
+import { ChevronDown } from "lucide-react"; // Importing a clean arrow icon
 
 function LandingVideo() {
+  const scrollToProducts = () => {
+    const productSection = document.getElementById("product-grid");
+    if (productSection) {
+      window.scrollTo({
+        top: productSection.offsetTop,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <div className="relative w-full h-screen overflow-hidden">
       {/* Background Video */}
@@ -15,12 +26,18 @@ function LandingVideo() {
         Your browser does not support the video tag.
       </video>
 
-      {/* Overlay Content (Optional) */}
+      {/* Overlay Content */}
       <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-center">
         <h1 className="text-4xl md:text-6xl font-bold drop-shadow-lg">Vacier Jewelry</h1>
         <p className="text-lg md:text-xl mt-4 drop-shadow-lg">Minimalist & Timeless</p>
-        <button className="mt-6 px-6 py-3 bg-white text-black font-semibold uppercase tracking-wide rounded-lg hover:bg-gray-300 transition">
-          Shop Now
+
+        {/* Downward Arrow Icon */}
+        <button
+          onClick={scrollToProducts}
+          className="mt-10"
+          aria-label="Scroll down"
+        >
+          <ChevronDown size={50} className="text-white" />
         </button>
       </div>
     </div>

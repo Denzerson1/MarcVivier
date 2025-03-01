@@ -1,49 +1,74 @@
 import { create } from "zustand";
 
-export const useCartStore = create((set, get) => ({
-  cart: [],
-  isOpen: false,
+export const useCartStore = create((set, get) => {
+  // Load cart from localStorage on initialization
+  const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
 
-  addToCart: (item) =>
-    set((state) => {
-      const existingItem = state.cart.find((cartItem) => cartItem.id === item.id);
-      if (existingItem) {
-        return {
-          cart: state.cart.map((cartItem) =>
+  const updateLocalStorage = (cart) => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  };
+
+  return {
+    cart: storedCart,
+    isOpen: false,
+
+    addToCart: (item) =>
+      set((state) => {
+        const existingItem = state.cart.find((cartItem) => cartItem.id === item.id);
+        let updatedCart;
+
+        if (existingItem) {
+          updatedCart = state.cart.map((cartItem) =>
             cartItem.id === item.id
               ? { ...cartItem, quantity: cartItem.quantity + 1 }
               : cartItem
-          ),
-        };
-      }
-      return { cart: [...state.cart, { ...item, quantity: 1 }] };
-    }),
+          );
+        } else {
+          updatedCart = [...state.cart, { ...item, quantity: 1 }];
+        }
 
-  increaseQuantity: (id) =>
-    set((state) => ({
-      cart: state.cart.map((item) =>
-        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
-      ),
-    })),
+        updateLocalStorage(updatedCart);
+        return { cart: updatedCart };
+      }),
 
-  decreaseQuantity: (id) =>
-    set((state) => ({
-      cart: state.cart
-        .map((item) =>
-          item.id === id ? { ...item, quantity: item.quantity - 1 } : item
-        )
-        .filter((item) => item.quantity > 0),
-    })),
+    increaseQuantity: (id) =>
+      set((state) => {
+        const updatedCart = state.cart.map((item) =>
+          item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+        );
 
-  removeFromCart: (id) =>
-    set((state) => ({
-      cart: state.cart.filter((cartItem) => cartItem.id !== id),
-    })),
+        updateLocalStorage(updatedCart);
+        return { cart: updatedCart };
+      }),
 
-  clearCart: () => set({ cart: [] }),
+    decreaseQuantity: (id) =>
+      set((state) => {
+        const updatedCart = state.cart
+          .map((item) =>
+            item.id === id ? { ...item, quantity: item.quantity - 1 } : item
+          )
+          .filter((item) => item.quantity > 0);
 
-  toggleCart: () => set((state) => ({ isOpen: !state.isOpen })),
+        updateLocalStorage(updatedCart);
+        return { cart: updatedCart };
+      }),
 
-  totalPrice: () =>
-    get().cart.reduce((total, item) => total + item.price * item.quantity, 0),
-}));
+    removeFromCart: (id) =>
+      set((state) => {
+        const updatedCart = state.cart.filter((cartItem) => cartItem.id !== id);
+
+        updateLocalStorage(updatedCart);
+        return { cart: updatedCart };
+      }),
+
+    clearCart: () => {
+      updateLocalStorage([]);
+      set({ cart: [] });
+    },
+
+    toggleCart: () => set((state) => ({ isOpen: !state.isOpen })),
+
+    totalPrice: () =>
+      get().cart.reduce((total, item) => total + item.price * item.quantity, 0),
+  };
+});

@@ -1,6 +1,7 @@
 import Navbar from "./components/Navbar";
 import CartFrontend from "./components/CartFrontend";
 import Video from "./components/Video";
+import ProductRows from "./components/ProductRows";
 
 
 function App() {
@@ -9,7 +10,7 @@ function App() {
     <div>
       <Video />
       <Navbar />
-
+      <ProductRows />
       <CartFrontend />
     </div>
   );
