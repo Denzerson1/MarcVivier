@@ -6,7 +6,7 @@ import { useCartStore } from "../store/cartStore";
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
-  const [mobileDropdown, setMobileDropdown] = useState(null); // Separate state for mobile
+  const [mobileDropdown, setMobileDropdown] = useState(null);
   const { toggleCart } = useCartStore();
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -51,10 +51,17 @@ function Navbar() {
           {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
 
-        {/* Center - Logo */}
+        {/* Center - Dynamic Logo */}
         <div className="absolute left-1/2 transform -translate-x-1/2">
-          <img src="/logo.png" alt="Vacier Logo" className="h-28" />
+          <a href="/">
+            <img
+              src={isScrolled ? "/logo.png" : "/logoWhite.png"}
+              alt="Vacier Logo"
+              className="h-28 transition-opacity duration-300 cursor-pointer"
+            />
+          </a>
         </div>
+
 
         {/* Right Side - Shopping Bag */}
         <button className="relative hover:text-gray-500">
@@ -75,7 +82,6 @@ function Navbar() {
             >
               {category}
             </button>
-            {/* Dropdown Items */}
             <AnimatePresence>
               {openDropdown === category && ["Männer", "Frauen", "Info"].includes(category) && (
                 <motion.div
@@ -100,7 +106,10 @@ function Navbar() {
       <AnimatePresence>
         {isMenuOpen && (
           <>
+            {/* Background overlay */}
             <div className="fixed inset-0 bg-black bg-opacity-40 z-40" onClick={() => setIsMenuOpen(false)}></div>
+
+            {/* Mobile Menu Sidebar */}
             <motion.div
               initial={{ x: "-100%", opacity: 0 }}
               animate={{ x: "0%", opacity: 1 }}
@@ -111,6 +120,7 @@ function Navbar() {
               <button className="self-end hover:text-gray-600" onClick={() => setIsMenuOpen(false)}>
                 <X className="h-6 w-6" />
               </button>
+
               {["Männer", "Frauen", "Bewertungen", "Info", "Aktionen", "Non-Violence"].map((category) => (
                 <div key={category} className="border-b pb-2">
                   <button
