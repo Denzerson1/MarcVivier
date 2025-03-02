@@ -1,4 +1,4 @@
-const stripe = require("stripe")("your-secret-key"); // Replace with your Stripe Secret Key
+const stripe = require("stripe")("sk_test_51Qy8e8R6JksytjrCsKOgWcY8WgLISkmWQxlToLhTaaYxjS9OmzTeGhXp320OvneWME8esELTkhSrthYqmY6WnYY600sZcu5JeG"); // Replace with your Stripe Secret Key
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
