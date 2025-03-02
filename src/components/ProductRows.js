@@ -80,7 +80,7 @@ function ProductCard({ product }) {
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       onClick={() => window.location.href = product.url}
-      id="product-grid"
+      
     >
       {!hover && !isVideoPlaying ? (
         <img

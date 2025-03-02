@@ -4,6 +4,7 @@ import Video from "./components/Video";
 import ProductRows from "./components/ProductRows";
 import RichTextSection from "./components/RichtextLandingPage";
 import Reviews from "./components/Reviews";
+import Footer from "./components/Footer"
 
 function App() {
 
@@ -13,8 +14,9 @@ function App() {
       <Navbar />
       <RichTextSection />
       <ProductRows />
-      
+      <Reviews />
       <CartFrontend />
+      <Footer />
     </div>
   );
 }

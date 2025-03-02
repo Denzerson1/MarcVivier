@@ -62,9 +62,8 @@ function Navbar() {
           </a>
         </div>
 
-
         {/* Right Side - Shopping Bag */}
-        <button className="relative hover:text-gray-500">
+        <button className="relative hover:text-gray-500 ml-auto">
           <ShoppingBag onClick={toggleCart} className="h-6 w-6" />
         </button>
       </div>
