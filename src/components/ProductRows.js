@@ -30,34 +30,7 @@ const products = [
     url: "/product/ring-women",
     label: "FRAUENRINGE",
   },
-  {
-    id: 5,
-    image: "/product/5.jpeg",
-    video: "/videos/bracelet-men.mp4",
-    url: "/product/bracelet-men",
-    label: "MÄNNERARMBÄNDER",
-  },
-  {
-    id: 6,
-    image: "/product/6.jpeg",
-    video: "/videos/bracelet-women.mp4",
-    url: "/product/bracelet-women",
-    label: "FRAUENARMBÄNDER",
-  },
-  {
-    id: 7,
-    image: "/product/chain1.jpeg",
-    video: "/videos/ring-men.mp4",
-    url: "/product/ring-men",
-    label: "MÄNNERRINGE",
-  },
-  {
-    id: 8,
-    image: "/product/chain2.jpeg",
-    video: "/videos/ring-women.mp4",
-    url: "/product/ring-women",
-    label: "FRAUENRINGE",
-  },
+  
 ];
 
 export default function ProductGrid() {

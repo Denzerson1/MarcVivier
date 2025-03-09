@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ShoppingBag, Menu, X, ChevronDown, ChevronUp } from "lucide-react";
+import { ShoppingBag, Menu, X } from "lucide-react";
 import { useCartStore } from "../store/cartStore";
 import { Link } from "react-router-dom";
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState(null);
-  const [mobileDropdown, setMobileDropdown] = useState(null);
   const { toggleCart } = useCartStore();
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -19,24 +17,6 @@ function Navbar() {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const toggleDropdown = (category) => {
-    setOpenDropdown(openDropdown === category ? null : category);
-  };
-
-  const toggleMobileDropdown = (category) => {
-    setMobileDropdown(mobileDropdown === category ? null : category);
-  };
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (!event.target.closest(".dropdown")) {
-        setOpenDropdown(null);
-      }
-    };
-    document.addEventListener("click", handleClickOutside);
-    return () => document.removeEventListener("click", handleClickOutside);
   }, []);
 
   return (
@@ -71,33 +51,18 @@ function Navbar() {
 
       {/* Desktop Menu */}
       <div className="hidden md:flex justify-center space-x-8 py-4">
-        {["Männer", "Frauen", "Bewertungen", "Info", "Aktionen", "Non-Violence"].map((category) => (
-          <div key={category} className="relative group dropdown">
-            <button
-              className="uppercase font-medium text-lg hover:text-gray-500"
-              onClick={(e) => {
-                e.stopPropagation();
-                toggleDropdown(category);
-              }}
-            >
-              {category}
-            </button>
-            <AnimatePresence>
-              {openDropdown === category && ["Männer", "Frauen", "Info"].includes(category) && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="absolute left-0 mt-2 w-48 bg-white p-4 space-y-2 text-black text-sm shadow-lg"
-                >
-                  <Link to="/collections/womens-bracelets" className="block hover:text-gray-500">Bracelets</Link>
-                  <Link to="/collections/womens-chains" className="block hover:text-gray-500">Chains</Link>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-        ))}
+        <Link to="/collection" className="uppercase font-medium text-lg hover:text-gray-500">
+          Collection
+        </Link>
+        <Link to="/reviews" className="uppercase font-medium text-lg hover:text-gray-500">
+          Reviews
+        </Link>
+        <Link to="/about" className="uppercase font-medium text-lg hover:text-gray-500">
+          About
+        </Link>
+        <Link to="/offers" className="uppercase font-medium text-lg hover:text-gray-500">
+          Offers
+        </Link>
       </div>
 
       {/* Mobile Menu */}
@@ -119,35 +84,18 @@ function Navbar() {
                 <X className="h-6 w-6" />
               </button>
 
-              {["Männer", "Frauen", "Bewertungen", "Info", "Aktionen", "Non-Violence"].map((category) => (
-                <div key={category} className="border-b pb-2">
-                  <button
-                    className="w-full text-left flex justify-between items-center uppercase font-medium text-lg hover:text-gray-600"
-                    onClick={() => toggleMobileDropdown(category)}
-                  >
-                    {category}
-                    {["Männer", "Frauen", "Info"].includes(category) ? (
-                      mobileDropdown === category ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />
-                    ) : null}
-                  </button>
-
-                  {/* Mobile Dropdown Items */}
-                  <AnimatePresence>
-                    {mobileDropdown === category && ["Männer", "Frauen", "Info"].includes(category) && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="ml-4 mt-2 space-y-2 text-gray-700 text-sm"
-                      >
-                        <Link to="/bracelets" className="block hover:text-gray-500">Bracelets</Link>
-                        <Link to="/chains" className="block hover:text-gray-500">Chains</Link>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              ))}
+              <Link to="/collection" className="uppercase font-medium text-lg hover:text-gray-600">
+                Collection
+              </Link>
+              <Link to="/reviews" className="uppercase font-medium text-lg hover:text-gray-600">
+                Reviews
+              </Link>
+              <Link to="/about" className="uppercase font-medium text-lg hover:text-gray-600">
+                About
+              </Link>
+              <Link to="/offers" className="uppercase font-medium text-lg hover:text-gray-600">
+                Offers
+              </Link>
             </motion.div>
           </>
         )}

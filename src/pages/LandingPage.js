@@ -6,6 +6,7 @@ import RichTextSection from "../components/RichtextLandingPage";
 import Reviews from "../components/Reviews";
 import Footer from "../components/Footer";
 import LandingpageVideo from "../components/LandingpageVideo";
+import Hero from "../components/Hero";
 
 function LandingPage() {
 
@@ -14,10 +15,11 @@ function LandingPage() {
       <Video />
       <Navbar />
       <RichTextSection />
-      <ProductRows />
+      <Hero />
+      
       <Reviews />
       <LandingpageVideo />
-      <CartFrontend />
+      
       <Footer />
     </div>
   );
