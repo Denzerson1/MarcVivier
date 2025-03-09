@@ -1,23 +1,19 @@
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import CartFrontend from "./components/CartFrontend";
-import Video from "./components/Video";
-import ProductRows from "./components/ProductRows";
-import RichTextSection from "./components/RichtextLandingPage";
-import Reviews from "./components/Reviews";
-import Footer from "./components/Footer"
+import Armband1 from "./pages/Armband1";
+import LandingPage from "./pages/LandingPage";
+import Catalog from "./pages/Catalog";
 
 function App() {
-
   return (
-    <div>
-      <Video />
+    <Router>
       <Navbar />
-      <RichTextSection />
-      <ProductRows />
-      <Reviews />
-      <CartFrontend />
-      <Footer />
-    </div>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/womenscatalog" element={<Catalog />} />
+        <Route path="/armband1" element={<Armband1 />} />
+      </Routes>
+    </Router>
   );
 }
 

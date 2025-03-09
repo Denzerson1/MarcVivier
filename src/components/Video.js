@@ -1,5 +1,4 @@
 import React from "react";
-import { ChevronDown } from "lucide-react"; // Importing a clean arrow icon
 
 function LandingVideo() {
   const scrollToProducts = () => {
@@ -28,16 +27,12 @@ function LandingVideo() {
 
       {/* Overlay Content */}
       <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-center">
-        <h1 className="text-4xl md:text-6xl font-bold drop-shadow-lg">Vacier Jewelry</h1>
-        <p className="text-lg md:text-xl mt-4 drop-shadow-lg">Minimalist & Timeless</p>
-
-        {/* Downward Arrow Icon */}
+        {/* Discover the Collection Button */}
         <button
           onClick={scrollToProducts}
-          className="mt-10"
-          aria-label="Scroll down"
+          className="absolute bottom-5 px-3 py-1 bg-black text-white text-xs font-bold tracking-wide rounded-md border border-white shadow-md hover:bg-gray-800 transition w-52"
         >
-          <ChevronDown size={50} className="text-white" />
+          DISCOVER THE COLLECTION
         </button>
       </div>
     </div>

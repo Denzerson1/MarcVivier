@@ -3,23 +3,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ShoppingBag, Menu, X, ChevronDown, ChevronUp } from "lucide-react";
 import { useCartStore } from "../store/cartStore";
 import { Link } from "react-router-dom";
+import Cart from "../components/Cart";
 
-function Navbar() {
+function WhiteNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
   const [mobileDropdown, setMobileDropdown] = useState(null);
   const { toggleCart } = useCartStore();
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const videoHeight = document.getElementById("video-section")?.offsetHeight || 0;
-      setIsScrolled(window.scrollY > videoHeight);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const toggleDropdown = (category) => {
     setOpenDropdown(openDropdown === category ? null : category);
@@ -40,11 +30,8 @@ function Navbar() {
   }, []);
 
   return (
-    <nav
-      className={`fixed top-0 left-0 w-full z-50 transition-colors duration-300 md:backdrop-blur-md 
-        ${isScrolled ? "bg-white text-black shadow-md" : "bg-white/10 text-white md:bg-white/10"}
-      `}
-    >
+    <nav className="fixed top-0 left-0 w-full z-50 bg-white text-black shadow-md">
+      <Cart />
       {/* Navbar */}
       <div className="flex justify-between items-center px-6 py-4 relative">
         {/* Left Side - Menu Button (Mobile) */}
@@ -52,20 +39,16 @@ function Navbar() {
           {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
 
-        {/* Center - Dynamic Logo */}
+        {/* Center - Logo */}
         <div className="absolute left-1/2 transform -translate-x-1/2">
-          <a href="/">
-            <img
-              src={isScrolled ? "/logo.png" : "/logoWhite.png"}
-              alt="Vacier Logo"
-              className="h-28 transition-opacity duration-300 cursor-pointer"
-            />
-          </a>
+          <Link to="/">
+            <img src="/logo.png" alt="Vacier Logo" className="h-28 cursor-pointer" />
+          </Link>
         </div>
 
         {/* Right Side - Shopping Bag */}
-        <button className="relative hover:text-gray-500 ml-auto">
-          <ShoppingBag onClick={toggleCart} className="h-6 w-6" />
+        <button className="relative hover:text-gray-500 ml-auto" onClick={toggleCart}>
+          <ShoppingBag className="h-6 w-6" />
         </button>
       </div>
 
@@ -91,8 +74,10 @@ function Navbar() {
                   transition={{ duration: 0.3 }}
                   className="absolute left-0 mt-2 w-48 bg-white p-4 space-y-2 text-black text-sm shadow-lg"
                 >
-                  <Link to="/collections/womens-bracelets" className="block hover:text-gray-500">Bracelets</Link>
-                  <Link to="/collections/womens-chains" className="block hover:text-gray-500">Chains</Link>
+                  <Link to="/armband1" className="block hover:text-gray-500">Armbänder</Link>
+                  <Link to="#" className="block hover:text-gray-500">Ohrringe</Link>
+                  <Link to="#" className="block hover:text-gray-500">Halsketten</Link>
+                  <Link to="#" className="block hover:text-gray-500">Ringe</Link>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -141,8 +126,10 @@ function Navbar() {
                         transition={{ duration: 0.3 }}
                         className="ml-4 mt-2 space-y-2 text-gray-700 text-sm"
                       >
-                        <Link to="/bracelets" className="block hover:text-gray-500">Bracelets</Link>
-                        <Link to="/chains" className="block hover:text-gray-500">Chains</Link>
+                        <Link to="/armband1" className="block hover:text-gray-500">Armbänder</Link>
+                        <Link to="#" className="block hover:text-gray-500">Ohrringe</Link>
+                        <Link to="#" className="block hover:text-gray-500">Halsketten</Link>
+                        <Link to="#" className="block hover:text-gray-500">Ringe</Link>
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -156,4 +143,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default WhiteNavbar;

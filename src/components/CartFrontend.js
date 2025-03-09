@@ -10,7 +10,7 @@ const products = [
 
 
 function CartFrontend() {
-    const { addToCart, toggleCart, cart } = useCartStore();
+    const { addToCart } = useCartStore();
 
     return (
         <div className="p-6 pt-24">

@@ -49,7 +49,7 @@ export default function ReviewsSection() {
       </div>
 
       {/* Desktop: Scrollable Grid (3 per row, 2 per height) */}
-      <div className="hidden md:block overflow-y-auto no-scrollbar h-[440px]">
+      <div className="hidden md:block overflow-y-auto no-scrollbar h-[460px]">
         <div className="grid md:grid-cols-3 gap-6">
           {sortedReviews.map((review, index) => (
             <motion.div
