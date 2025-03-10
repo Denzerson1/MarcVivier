@@ -2,7 +2,7 @@ import React from "react";
 
 function StyledVideoSection() {
   return (
-    <div className="relative w-full flex justify-center px-10 py-10">
+    <div className="relative w-full flex justify-center px-4 sm:px-10 py-10">
       {/* Video Container */}
       <div className="relative w-full max-w-7xl rounded-2xl overflow-hidden">
         <video
@@ -16,9 +16,12 @@ function StyledVideoSection() {
           Your browser does not support the video tag.
         </video>
 
-        {/* Overlay Content */}
-        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-white text-center px-4">
-          <p className="text-sm font-light max-w-2xl">
+        {/* Bottom Overlay */}
+        <div className="absolute bottom-0 left-0 w-full h-1/4 bg-gradient-to-t from-black/60 to-transparent"></div>
+
+        {/* Full-Width Bottom Text */}
+        <div className="absolute bottom-4 left-0 w-full flex justify-center px-4 sm:px-8">
+          <p className="text-[14px] sm:text-base md:text-lg lg:text-xl text-white font-light text-center max-w-5xl mx-auto">
             Die Taschen von Maison Margiela verkörpern den Nonkonformismus, der dem Maison innewohnt.
           </p>
         </div>
