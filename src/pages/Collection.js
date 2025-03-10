@@ -14,8 +14,9 @@ function Collections() {
         <video
           className="absolute top-0 left-0 w-full h-full object-cover pointer-events-none"
           autoPlay
-          muted
           loop
+          muted
+          playsInline
         >
           <source src="/demovideo.mp4" type="video/mp4" />
         </video>

@@ -10,7 +10,7 @@ function StyledVideoSection() {
           loop
           muted
           playsInline
-          className="w-full h-auto object-cover rounded-2xl"
+          className="w-full h-auto object-cover rounded-2xl pointer-events-none" // Added pointer-events-none
         >
           <source src="/demovideo.mp4" type="video/mp4" />
           Your browser does not support the video tag.
