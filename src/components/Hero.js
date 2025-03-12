@@ -46,8 +46,8 @@ export default function CategoryTabs() {
         <div className="relative mb-4 flex justify-center">
           <button
             className={`text-lg font-medium px-4 py-2 mx-4 transition-all duration-200 
-              ${activeTab === "bracelets" 
-                ? "text-silver-500 border-b-4 border-silver-500" 
+              ${activeTab === "bracelets"
+                ? "text-silver-500 border-b-4 border-silver-500"
                 : "text-gray-800 hover:text-silver-500"}`}
             onClick={() => handleTabChange("bracelets")}
           >
@@ -55,8 +55,8 @@ export default function CategoryTabs() {
           </button>
           <button
             className={`text-lg font-medium px-4 py-2 mx-4 transition-all duration-200 
-              ${activeTab === "necklaces" 
-                ? "text-silver-500 border-b-4 border-silver-500" 
+              ${activeTab === "necklaces"
+                ? "text-silver-500 border-b-4 border-silver-500"
                 : "text-gray-800 hover:text-silver-500"}`}
             onClick={() => handleTabChange("necklaces")}
           >
@@ -156,6 +156,16 @@ export default function CategoryTabs() {
           </div>
         </div>
       </div>
+      <div className="flex justify-center pt-6">
+        <a
+          href="collection"
+          className="px-6 py-2 md:px-16 md:py-3 border border-black text-black tracking-[0.25em] text-[12px] md:text-[12px] uppercase hover:bg-black hover:text-white transition-all duration-300 max-w-xs md:max-w-none cursor-pointer"
+        >
+          Shop Now
+        </a>
+      </div>
+
+
     </div>
   );
 }
