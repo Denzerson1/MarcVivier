@@ -25,13 +25,13 @@ function LandingVideo() {
   return (
     <div className="relative w-full">
       {/* Background Video */}
-      <div className={`${isMobile ? 'min-h-[50vh]' : 'h-screen'} w-full relative`}>
+      <div className={`${isMobile ? 'min-h-[70vh]' : 'h-screen'} w-full relative overflow-hidden`}>
         <video
           autoPlay
           loop
           muted
           playsInline
-          className="absolute top-0 left-0 w-full h-full object-cover"
+          className={`absolute top-0 w-full h-full object-cover ${isMobile ? 'scale-[1.5] origin-left' : ''}`}
         >
           <source src="/videos/stephansdom.mp4" type="video/mp4" />
           Your browser does not support the video tag.
