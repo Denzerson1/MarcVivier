@@ -33,7 +33,7 @@ function StyledVideoSection() {
               className="w-full h-full object-cover rounded-r-2xl pointer-events-none"
               style={{ objectFit: 'cover', height: '100%' }}
             >
-              <source src="/videos/1.mp4" type="video/mp4" />
+              <source src="/videos/0312.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
             {/* Overlay */}
@@ -44,7 +44,7 @@ function StyledVideoSection() {
         {/* Full-Width Bottom Text */}
         <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 w-full max-w-5xl px-4 sm:px-8 text-center">
           <p className="text-[14px] sm:text-base md:text-lg lg:text-xl text-white font-light">
-            Die Taschen von Maison Margiela verkörpern den Nonkonformismus, der dem Maison innewohnt.
+            Marc Vivier embodies the unconventional elegance that defines our brand.
           </p>
         </div>
       </div>

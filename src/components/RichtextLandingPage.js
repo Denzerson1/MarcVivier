@@ -2,7 +2,7 @@ import { Sparkles } from "lucide-react";
 
 export default function RichTextSection() {
   return (
-    <section className="text-center max-w-2xl mx-auto py-12 px-4 sm:py-16 sm:px-6">
+    <section className="text-center max-w-2xl mx-auto py-12 px-4 sm:px-6">
       {/* Icon on Top */}
       <div className="flex justify-center">
         <Sparkles className="h-6 w-6 sm:h-8 sm:w-8 text-gray-800" />
